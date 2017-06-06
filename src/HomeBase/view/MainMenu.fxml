@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="background" stylesheets="@../myStyle.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HomeBase.view.mainMenuController">
+   <left>
+      <VBox spacing="40.0" BorderPane.alignment="CENTER">
+         <children>
+            <Region prefHeight="0.0" prefWidth="284.0" />
+            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+              <buttons>
+                <Button id="heapButton" fx:id="heapbutton" mnemonicParsing="false" onAction="#handleButtonAction" onMouseEntered="#handleButtonHover" onMouseExited="#handleButtonExit" prefHeight="53.0" prefWidth="160.0" text="Heap">
+                     <font>
+                        <Font name="Century Gothic" size="12.0" />
+                     </font>
+                  </Button>
+              </buttons>
+            </ButtonBar>
+            <Region />
+            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+              <buttons>
+                <Button fx:id="horspoolbutton" mnemonicParsing="false" onAction="#handleButtonAction" onMouseEntered="#handleButtonHover" onMouseExited="#handleButtonExit" prefHeight="53.0" prefWidth="160.0" text="Horpsool's" />
+              </buttons>
+            </ButtonBar>
+            <Region />
+            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+              <buttons>
+                <Button fx:id="huffmanbutton" mnemonicParsing="false" onAction="#handleButtonAction" onMouseEntered="#handleButtonHover" onMouseExited="#handleButtonExit" prefHeight="53.0" prefWidth="160.0" text="Huffman's" />
+              </buttons>
+            </ButtonBar>
+            <Region />
+            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+              <buttons>
+                <Button fx:id="primsbutton" mnemonicParsing="false" onAction="#handleButtonAction" onMouseEntered="#handleButtonHover" onMouseExited="#handleButtonExit" prefHeight="53.0" prefWidth="160.0" text="Prim's" />
+              </buttons>
+            </ButtonBar>
+            <Region />
+         </children>
+         <BorderPane.margin>
+            <Insets left="100.0" top="90.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets left="25.0" />
+         </padding>
+      </VBox>
+   </left>
+   <top>
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar fx:id="myMenu" prefWidth="1920.0" styleClass="menu" stylesheets="@../myStyle.css">
+               <menus>
+                  <Menu id="fileMenu" fx:id="toolsMenu" mnemonicParsing="false" text="Tools">
+                     <items>
+                        <MenuItem fx:id="close" mnemonicParsing="false" onAction="#handleMenuAction" text="Close" />
+                     </items>
+                  </Menu>
+               </menus>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </MenuBar>
+            <Label alignment="CENTER" contentDisplay="CENTER" stylesheets="@../myStyle.css" text="Algorithm Visualizer" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="60.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" styleClass="vbox" stylesheets="@../myStyle.css" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets right="200.0" top="70.0" />
+         </BorderPane.margin>
+         <children>
+            <ImageView fx:id="blurbView" fitHeight="400.0" fitWidth="820.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@startScreen.jpg" />
+               </image></ImageView>
+         </children>
+      </VBox>
+   </center>
+   <right>
+      <Region prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="190.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@CSU_Logo_Primary1_BlueBackground.png" />
+               </image>
+               <HBox.margin>
+                  <Insets bottom="100.0" right="50.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
