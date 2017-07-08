@@ -25,41 +25,6 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root,width,height));
         primaryStage.show();
     }
-   /* private static void showMainView() throws IOException{
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("view/MainMenu.fxml"));
-        mainLayout = loader.load();
-        Scene mainScene = new Scene(mainLayout);
-        primaryStage.setScene(mainScene);
-        primaryStage.show();
-
-    }
-    public static void showPrimsStage() throws IOException{
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("prims/primsSubmenu.fxml"));
-        BorderPane heapSub = loader.load();
-
-        Stage primsStage = new Stage();
-        primsStage.setTitle("Prim's Submenu");
-        primsStage.initModality(Modality.WINDOW_MODAL);
-        primsStage.initOwner(primaryStage);
-
-        Scene scene = new Scene(heapSub);
-        primsStage.setScene(scene);
-        primsStage.showAndWait();
-
-    }
-    public static void showMainHeap() throws IOException{
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("heap/heapMain.fxml"));
-        mainLayout = loader.load();
-        Scene mainScene = new Scene(mainLayout);
-        primaryStage.setScene(mainScene);
-        primaryStage.show();
-
-    }*/
-
-
     public static void main(String[] args) {
         launch(args);
     }

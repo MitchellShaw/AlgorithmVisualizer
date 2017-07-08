@@ -38,12 +38,6 @@
             <Region />
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
-                <Button fx:id="huffmanbutton" mnemonicParsing="false" onAction="#handleButtonAction" onMouseEntered="#handleButtonHover" onMouseExited="#handleButtonExit" prefHeight="53.0" prefWidth="160.0" text="Huffman's" />
-              </buttons>
-            </ButtonBar>
-            <Region />
-            <ButtonBar prefHeight="40.0" prefWidth="200.0">
-              <buttons>
                 <Button fx:id="primsbutton" mnemonicParsing="false" onAction="#handleButtonAction" onMouseEntered="#handleButtonHover" onMouseExited="#handleButtonExit" prefHeight="53.0" prefWidth="160.0" text="Prim's" />
               </buttons>
             </ButtonBar>
@@ -86,7 +80,7 @@
             <Insets right="200.0" top="70.0" />
          </BorderPane.margin>
          <children>
-            <ImageView fx:id="blurbView" fitHeight="400.0" fitWidth="820.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="blurbView" fitHeight="386.0" fitWidth="820.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@startScreen.jpg" />
                </image></ImageView>

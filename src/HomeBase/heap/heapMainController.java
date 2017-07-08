@@ -16,6 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 /**
@@ -127,8 +128,12 @@ public class heapMainController {
 
 
     private int[] finalArray;
-    private boolean bottomUp;
     private boolean theHeap;
+    private boolean bottomSelect;
+    private boolean bottomUp;
+    private boolean topSelect;
+    private Label[] labels;
+
     String userInput;
 
     public void setUserInput(String data) {
@@ -145,8 +150,39 @@ public class heapMainController {
         }
     }
 
-    public void getCheckBox(boolean bottom) {
-        bottomUp = bottom;
+    public void getCheckBox(boolean checkbox) {
+        if(checkbox) {
+            bottomSelect=true;
+            topSelect=false;
+            bottomUp=true;
+        }
+        else{
+            bottomSelect=false;
+            topSelect=true;
+        }
+    }
+
+    boolean created;
+
+    @FXML
+    private void handleStepAction(ActionEvent event) throws IOException {
+        //handle initialization here
+
+        if(bottomSelect) {
+            if (bottomUp) {
+                createTree(finalArray.length);
+            }
+            if (created) {
+                heapify();
+            }
+            created = true;
+        }
+        if(topSelect){
+
+            topDown();
+
+
+        }
     }
 
     @FXML
@@ -163,6 +199,20 @@ public class heapMainController {
             System.exit(0);
         }
     }
+    private void setLabelsInvis(){
+        labels = new Label[]{root,L,R,LL,LR,RL,RR,LLL,LLR,LRL,LRR,RLL,RLR,RRL,RRR};
+        for(int i=0;i<finalArray.length;i++){
+            labels[i].setVisible(false);
+        }
+    }
+    private void updateLabels(int[] myArray){
+        labels = new Label[]{root,L,R,LL,LR,RL,RR,LLL,LLR,LRL,LRR,RLL,RLR,RRL,RRR};
+        for(int i=0;i<myArray.length;i++){
+            labels[i].setText(Integer.toString(myArray[i]));
+        }
+
+    }
+
     private void createLevel1() {
         //left
         L.setText(Integer.toString(finalArray[1]));
@@ -248,7 +298,6 @@ public class heapMainController {
     }
 
     private void createTree(int value) {
-        //root
         root.setText(Integer.toString(finalArray[0]));
         Croot.setVisible(true);
         if (value == 3) {
@@ -274,23 +323,116 @@ public class heapMainController {
         }
     }
 
-    boolean created;
-    int counter;
-
-    @FXML
-    private void handleStepAction(ActionEvent event) throws IOException {
-        //handle initialization here
-
-        if (bottomUp) {
-            createTree(finalArray.length);
-
+    private void printArray(int [] myArray){
+        for(int i = 0;i<myArray.length;i++){
+            System.out.println(myArray[i]);
         }
-        if (created) {
-            heapify();
-        }
-        created = true;
+    }
+    private int tCounter;
+    private int parentCounter;
+    private int[] topDownArray;
+    private boolean killswitch;
+    private int parentCheck;
+    private int retainer;
+    private boolean checkRoot;
+    private boolean breakout;
+
+    private void switchMe(int[] myArray, int x, int y){
+        int temp= myArray[x];
+        myArray[x] = myArray[y];
+        myArray[y]= temp;
     }
 
+    private void topDown(){
+
+        if(!Croot.isVisible()){
+
+            createTree(finalArray.length);
+            setLabelsInvis();
+
+            topDownArray = new int[finalArray.length];
+            topDownArray[tCounter]=finalArray[tCounter];
+
+            root.setText(Integer.toString(topDownArray[0]));
+            root.setVisible(true);
+            Croot.setVisible(true);
+
+            parentCounter=0;
+            parentCheck=0;
+
+
+        }
+
+        if(parentCheck <= 0 && tCounter >=topDownArray.length) {
+            stepButton.setDisable(true);
+            killswitch=true;
+            checkSwap(topDownArray,0,retainer);
+            //tCounter>=topDownArray.length
+        }
+        if(!killswitch) {
+            if (parentCheck < 1) {
+                if (!labels[tCounter].isVisible()) {
+                    insertNode(topDownArray, labels, tCounter);
+                } else {
+                    checkSwap(topDownArray, parentCounter, tCounter);
+                    tCounter++;
+                    if (parentCounter > 0) {
+                        parentCheck++;
+                    }
+
+                }
+            } else {
+                if(retainer<1) {
+                    checkSwap(topDownArray, 0, parentCounter);
+                    parentCheck--;
+                }
+                if(retainer>=1){
+                    checkSwap(topDownArray,retainer,parentCounter);
+                    checkRoot=true;
+                    killswitch=true;
+                    System.out.println(checkRoot);
+                }
+            }
+        }else{
+            if(checkRoot){
+                checkSwap(topDownArray,0,retainer);
+                parentCheck--;
+                checkRoot=false;
+                killswitch=false;
+            }
+        }
+        if(parentCounter<=4 && parentCounter>2){
+            retainer = 1;
+        }
+        else if (parentCounter >=5){
+            retainer = 2;
+        }
+    }
+
+    private void insertNode(int[] myArray, Label[] myLabels, int counter)
+    {
+        int modCounter=0;
+        myArray[counter] = finalArray[counter];
+
+        myLabels[counter].setText(Integer.toString(topDownArray[counter]));
+        myLabels[counter].setVisible(true);
+        if(counter>2) {
+            modCounter = counter % 2;
+        }
+        if(modCounter!=0) {
+            if (labels[modCounter].isVisible()) {
+                parentCounter++;
+            }
+        }
+    }
+    private void checkSwap(int[] myArray, int parent, int child){
+
+        if(myArray[child] > myArray[parent]){
+            switchMe(myArray, child, parent);
+            updateLabels(myArray);
+        }
+
+    }
 
     //Variables needed for swapping
     private int myI;
@@ -353,9 +495,10 @@ public class heapMainController {
             }
             if(myI ==0){
                 completed.setVisible(true);
+                stepButton.setDisable(true);
             }
         }
-
+    int counter;
     private void heapify() {
 
         if (counter == 0) {
